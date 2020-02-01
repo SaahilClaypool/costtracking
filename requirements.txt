@@ -1,0 +1,8 @@
+Flask
+pandas
+blinker
+simplejson
+watchdog
+python-dotenv
+livereload
+plotly
