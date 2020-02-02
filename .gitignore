@@ -1,5 +1,7 @@
 # SC
 .env
+client_secret.json
+credentials.json
 
 # Created by https://www.gitignore.io/api/python,flask
 # Edit at https://www.gitignore.io/?templates=python,flask
