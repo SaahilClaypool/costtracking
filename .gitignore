@@ -1,5 +1,6 @@
 # SC
 .env
+temp_client_secret.json
 client_secret.json
 credentials.json
 

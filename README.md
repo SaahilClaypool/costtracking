@@ -1,5 +1,7 @@
 # Cost Sharing
 
+https://costsavings.herokuapp.com/
+
 App to show spending and help calculate what is owed between two people at the end of the month
 
 ## Features
@@ -12,3 +14,11 @@ App to show spending and help calculate what is owed between two people at the e
 ## Org
 
 Trello: https://trello.com/b/Nz1DZk2j/costsavings
+
+## misk 
+
+```
+- setup env: 'heroku config:set google_secrets="`cat ./client_secret.json | paste -sd \"\t\"`"'
+    - 'export google_secrets="`cat ./client_secret.json | paste -sd \"\t\"`"'
+- deploy: git push heroku master
+```
