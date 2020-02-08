@@ -1,0 +1,23 @@
+{
+  "name": "static",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "d3": "^5.15.0",
+    "ify-loader": "^1.1.0",
+    "jquery": "^3.4.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "plotly.js-dist": "^1.52.2"
+  }
+}

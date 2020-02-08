@@ -7,41 +7,33 @@
 </head>
 
 <body>
-    <h1 class="Main Header">Cost Savings</h1>
-    <div classname="summary">
-        <ul>
-            {% for msg in msgs %}
-            <li>{{ msg }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <div class='app'>
+        <style src="static/global.css"></style>
+        <h1 class="Main Header">Cost Savings</h1>
+        <div classname="summary">
+            <ul>
+                {% for msg in msgs %}
+                <li>{{ msg }}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <div classname="graphs">
-        {% for id in ids %}
+        <div classname="graphs">
+            {% for id in ids %}
             <h3>{{id}}</h3>
             <div id="{{id}}"></div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </body>
 
 <footer>
-     <!-- D3.js -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-     <!-- jQuery -->
-     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-     <!-- Plotly.js -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="static/dist/main.js"></script>
     <script type="text/javascript">
+        // This should only setup data structures for other code
         var graphs = {{ graphs | safe }};
         var ids = {{ ids | safe }};
         var layouts = {{ layouts }};
-
-
-        for(var i in graphs) {
-            Plotly.newPlot(ids[i], // the ID of the div, created above
-                        graphs[i],
-                        layouts[i]);
-        }
     </script>
 </footer>
 

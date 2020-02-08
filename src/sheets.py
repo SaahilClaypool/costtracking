@@ -27,5 +27,3 @@ def load_data(sheet_url = "https://docs.google.com/spreadsheets/d/18BEYYJE51eQsA
     print(df)
 
     return df
-
-load_data()
