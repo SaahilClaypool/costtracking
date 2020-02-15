@@ -11,7 +11,6 @@ import pandas as pd
 import numpy as np
 import re
 
-
 SAA_PAYS = 0.6
 SAR_PAYS = 0.4
 
@@ -160,7 +159,17 @@ def plot_spending(df):
     return ["Total Spending", plots, layout]
 
 
-def graph_data(df):
+# TODO find the 'correct' way to do this
+def flatmap(df):
+    l = []
+    for v in df.values:
+        d = {}
+        for ci, c in enumerate(v):
+            d[df.columns[ci]] = c
+        l.append(d)
+    return l
+
+def graph_ploty_data(df):
     df['DayOfMonth'] = df.apply(lambda row: date_to_day_of_month(row.Date), axis=1)
     df.sort_values('DayOfMonth', inplace=True)
     ids, graphs, layouts = [], [], []
@@ -178,4 +187,5 @@ def graph_data(df):
     return [ids, as_json(graphs), as_json(layouts)]
 
 
-
+def raw_data(df):
+    return as_json(flatmap(df))
