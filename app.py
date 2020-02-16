@@ -1,4 +1,4 @@
-from flask import Flask, escape, request, render_template
+from flask import Flask, escape, request, render_template, jsonify
 from flask_cors import CORS
 import pandas as pd
 
@@ -7,7 +7,7 @@ from src.data import load_data
 
 app = Flask(__name__, template_folder="views")
 # enable CORS
-CORS(app, resources={r'/*': {'origins': '*'}})
+CORS(app, resources={r'/data': {'origins': '*'}})
 
 @app.route('/')
 def index():
@@ -29,7 +29,8 @@ def data():
     print('data')
     df = load_data()
     raw_data = calculate.raw_data(df)
-    return raw_data
+    print("sending back raw data: ", raw_data)
+    return jsonify(raw_data)
 
 if __name__ == "__main__":
     app.run()

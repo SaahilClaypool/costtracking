@@ -4,23 +4,32 @@ import GraphView from './GraphView';
 
 function App() {
 
-  const [state, setState] = React.useState({currentMonth: 0});
+  const [currentMonth, setCurrentMonth] = React.useState(0);
+  const [data, setData] = React.useState([]);
 
   let setMonthRelative = offset => {
-    setState({currentMonth: (state.currentMonth + offset + 12) % 12})
+    setCurrentMonth((currentMonth + offset + 12) % 12)
   }
 
-  let incState = () => setMonthRelative(+1);
-  let decState = () => setMonthRelative(-1);
+  let incMonth = () => setMonthRelative(+1);
+  let decMonth = () => setMonthRelative(-1);
 
   useEffect(() => {
-    async function fetchData() {
-      let resp = await fetch("127.0.0.1:5000/data");
-      console.log(resp);
-    }
-
+    const fetchData = async () => {
+      const resp = await fetch("http://127.0.0.1:5000/data",
+        {
+          mode: "cors",
+          headers: {
+            "Access-Control-Allow-Origin": "*"
+          }
+        }
+      );
+      let body = await resp.json()
+      console.log(`setting data to ${body}`)
+      setData(JSON.parse(body));
+    };
     fetchData();
-  })
+  }, []);
 
   return (
     <div className="App">
@@ -29,7 +38,7 @@ function App() {
         <div className="Picker">
           <ul className="MonthPicker">
             <li>
-              <button onClick={decState}>
+              <button onClick={decMonth}>
                 &larr;
               </button>
             </li>
@@ -39,12 +48,12 @@ function App() {
               </button>
             </li>
             <li>
-              <button onClick={incState}>
+              <button onClick={incMonth}>
                 &rarr;
               </button>
             </li>
           </ul>
-          <GraphView currentMonth={state.currentMonth}/>
+          <GraphView month={currentMonth} data={data} />
         </div>
       </div>
     </div>

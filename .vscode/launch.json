@@ -2,11 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch index.html",
+            "name": "Launch firefox",
             "type": "firefox",
-            "request": "attach",
-            "webRoot": "${workspaceFolder}/static",
-            "url": "http://localhost:5000",
+            "request": "launch",
+            "webRoot": "${workspaceFolder}/react-frontend",
+            "url": "http://localhost:3000",
         }
     ]
 }
