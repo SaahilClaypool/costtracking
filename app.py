@@ -28,6 +28,14 @@ def data():
     print("sending back raw data: ", raw_data)
     return jsonify(raw_data)
 
+@app.route('/rand')
+def randomData():
+    print('data')
+    df = load_data(random=True)
+    raw_data = calculate.raw_data(df)
+    print("sending back random data: ", raw_data)
+    return jsonify(raw_data)
+
 if __name__ == "__main__":
     app.run()
  

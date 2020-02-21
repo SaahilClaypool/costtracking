@@ -7,15 +7,19 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-const URL =  (process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "")
+const URL = (process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "")
 
 function App() {
 
   const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth());
   const [data, setData] = React.useState([]);
-  const [isCum, setIsCum] = React.useState(true);
 
+  const [isCum, setIsCum] = React.useState(true);
   let toggleCummulative = () => setIsCum(!isCum);
+
+  const [random, setRandom] = React.useState(false);
+  let toggleRandom = () => setRandom(!random);
+
 
   let setMonthRelative = offset => {
     setCurrentMonth((currentMonth + offset + 12) % 12)
@@ -24,45 +28,58 @@ function App() {
   let incMonth = () => setMonthRelative(+1);
   let decMonth = () => setMonthRelative(-1);
 
+  const fetchData = async () => {
+    console.log(URL);
+
+    let path = (random ? "/rand" : "/data");
+
+    const resp = await fetch(URL + path,
+      {
+        mode: "cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        }
+      }
+    );
+    let body = await resp.json()
+
+    let data = JSON.parse(body).map(d => {
+      let vals = d.Date.split('/');
+      return {
+        ...d,
+        month: parseInt(vals[0]),
+        day: parseInt(vals[1]),
+        year: parseInt(vals[2]),
+      }
+    })
+
+    console.log(data)
+
+    setData(data);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      console.log(URL);
-      const resp = await fetch(URL + "/data",
-        {
-          mode: "cors",
-          headers: {
-            "Access-Control-Allow-Origin": "*"
-          }
-        }
-      );
-      let body = await resp.json()
-
-      let data = JSON.parse(body).map(d => {
-        let vals = d.Date.split('/');
-        return {
-          ...d,
-          month: parseInt(vals[0]),
-          day: parseInt(vals[1]),
-          year: parseInt(vals[2]),
-        }
-      })
-
-      console.log(data)
-
-      setData(data);
-    };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [random]);
 
   return (
     <div className="App">
       <h1>Cost Savings</h1>
-      <h2>{monthNames[currentMonth]}</h2>
       <div className="Controls">
-        <button 
+        <button
+          className="ToggleRandom"
+          onClick={toggleRandom}
+        >
+          random data: {random ? "True" : "False"}
+        </button>
+        <button
           className="ToggleCummulative"
           onClick={toggleCummulative}
-          >
+        >
           {isCum ? "Cummulative" : "Single Purchases"}
         </button>
         <div className="Content">
@@ -84,13 +101,23 @@ function App() {
               </button>
               </li>
             </ul>
-            <GraphView month={currentMonth} data={data} isCummulative={isCum}/>
-            <InfoView  data={data}/>
           </div>
+          <h2>{monthNames[currentMonth]}</h2>
+          <GraphView month={currentMonth} data={filterData(data, currentMonth)} isCummulative={isCum} />
+          <InfoView data={filterData(data, currentMonth)} />
         </div>
       </div>
     </div>
   );
 }
+
+function parseMonth(datum) {
+    return parseInt(datum.Date.split('/')[0])
+}
+
+function filterData(data, month) {
+    return data.filter(d => parseMonth(d) === month + 1)
+}
+
 
 export default App;

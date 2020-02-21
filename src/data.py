@@ -37,13 +37,17 @@ def randomData():
 
 
 
-def load_data():
+def load_data(random=False):
     host = os.environ.get('FLASK_HOST', 'remote')
     print(host)
-    if (host == 'local'):
+    if (random):
         # print("reading local file")
         # return pd.read_csv('./Things-Data View.csv')
         print("random data")
         return randomData()
     else:
-        return sheets.load_data()
+        if (host == 'local'):
+            print("reading local file")
+            return pd.read_csv('./Things-Data View.csv')
+        else:
+            return sheets.load_data()

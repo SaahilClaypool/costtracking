@@ -10,17 +10,8 @@ let isCummulative = true;
 
 // https://medium.com/@jeffbutsch/using-d3-in-react-with-hooks-4a6c61f1d102
 
-function parseMonth(datum) {
-    return parseInt(datum.Date.split('/')[0])
-}
-
 function parseDay(datum) {
     return parseInt(datum.Date.split('/')[1])
-}
-
-
-function filterData(data, month) {
-    return data.filter(d => parseMonth(d) === month + 1)
 }
 
 function updateGraph(data, d3Node) {
@@ -83,7 +74,7 @@ function updateGraph(data, d3Node) {
                 `\
                 <strong>${d.Who}</strong>\
                 <hr/>
-                <p>${d.Description}</p>
+                <p>${(d.Description ? d.Description : "")}</p>
                 `
             ))
                 .style("left", (d3.event.pageX + 10) + "px")
@@ -188,11 +179,11 @@ function GraphView(props) {
     isCummulative = props.isCummulative;
 
     useEffect(() => {
-        initGraph(cleanData(filterData(props.data, props.month)), d3Node)
+        initGraph(cleanData(props.data, props.month), d3Node)
     }, [])
 
     useEffect(() => {
-        updateGraph(cleanData(filterData(props.data, props.month)), d3Node)
+        updateGraph(cleanData(props.data, props.month), d3Node)
     })
     return <div className="GraphView">
         <div id="D3View">
