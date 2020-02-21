@@ -1,21 +1,17 @@
-from flask import Flask, escape, request, render_template, jsonify
+from flask import Flask, escape, request, render_template, jsonify, send_from_directory
 from flask_cors import CORS
 import pandas as pd
 
 import src.calculate as calculate
 from src.data import load_data
 
-app = Flask(__name__, template_folder="views")
+app = Flask(__name__, template_folder="views", static_url_path='', static_folder='react-frontend/build')
 # enable CORS
 CORS(app, resources={r'/data': {'origins': '*'}})
 
 @app.route('/')
 def index():
-    print('index')
-    df = load_data()
-    msgs = calculate.owe(df)
-    ids, graph_ploty_data, layouts = calculate.graph_ploty_data(df)
-    return render_template('index.html.j2', msgs=msgs, ids=ids, graphs=graph_ploty_data, layouts=layouts)
+    return app.send_static_file('index.html')
 
 @app.route('/d3')
 def d3Version():

@@ -7,6 +7,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+const URL =  (process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "")
 
 function App() {
 
@@ -25,7 +26,8 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await fetch("http://127.0.0.1:5000/data",
+      console.log(URL);
+      const resp = await fetch(URL + "/data",
         {
           mode: "cors",
           headers: {
