@@ -38,8 +38,9 @@ function updateGraph(data, d3Node) {
         .range([4.0, 10])
     let r = (d) => rScale(d.Cost);
 
-    let colorScale = d3.scaleOrdinal(d3.schemeAccent);
-    let color = (d) => colorScale(d.Who) + 'aa'; // opacity
+    let colorScale = d3.scaleOrdinal(d3.schemeDark2  );
+    let opacity = (d) => (d && d.Personal) ? '77' : 'cc';
+    let color = (d) => colorScale(d.Who) + opacity(d);
 
     const svg = d3.select(d3Node.current);
     const content = svg.select('g');
@@ -72,9 +73,9 @@ function updateGraph(data, d3Node) {
                 .style("opacity", .9);
             div.html((
                 `\
-                <strong>${d.Who}</strong>\
+                <strong>${d.Who}</strong><span>${d.Personal ? '  (Personal)' : ''}</span>\
                 <hr/>
-                <p>${(d.Description ? d.Description : "")}</p>
+                <p>${(d.What ? d.What : "Misc")}</p>
                 `
             ))
                 .style("left", (d3.event.pageX + 10) + "px")
@@ -180,7 +181,9 @@ function GraphView(props) {
 
     useEffect(() => {
         initGraph(cleanData(props.data, props.month), d3Node)
-    }, [])
+    }, 
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
+    [])
 
     useEffect(() => {
         updateGraph(cleanData(props.data, props.month), d3Node)

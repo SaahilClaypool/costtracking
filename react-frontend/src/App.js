@@ -35,6 +35,7 @@ function App() {
 
     const resp = await fetch(URL + path,
       {
+        method: "GET",
         mode: "cors",
         headers: {
           "Access-Control-Allow-Origin": "*"
@@ -51,20 +52,28 @@ function App() {
         day: parseInt(vals[1]),
         year: parseInt(vals[2]),
       }
-    })
+    });
 
-    console.log(data)
+    data.sort((a, b) => {
+        let dateVal = a => a.day + a.month * 100 + a.year * 1000
+        return (dateVal(a) - dateVal(b))
+      });
 
     setData(data);
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, 
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
+  []);
 
   useEffect(() => {
     fetchData();
-  }, [random]);
+
+  }, 
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
+  [random]);
 
   return (
     <div className="App">

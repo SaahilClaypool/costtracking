@@ -26,6 +26,7 @@ def randomData():
                         "Cost": float(f"{random.uniform(Cost[0], Cost[1]):.2f}"),
                         "What": what,
                         "Who": person,
+                        "Personal": random.uniform(0, 1) > 0.5,
                         "Description": person + ": " + " ".join([what, what, what]),
                     }
                     things.append(thing)

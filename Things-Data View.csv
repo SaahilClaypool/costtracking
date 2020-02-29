@@ -1,19 +1,19 @@
-﻿Cost,What,Who,Date,Description
-107.04,groceries,Sarah Bottari,1/30/2020,
-56.55,groceries,Sarah Bottari,1/25/2020,
-29.99,internet,Sarah Bottari,1/24/2020,
-111.44,target,Sarah Bottari,1/22/2020,
-243.30,target,Saahil Claypool,1/20/2020,"Bought house goods etc."
-28.49,Boca Fiesta,Saahil Claypool,1/20/2020,Chimichanga and 
-9.28,groceries,Sarah Bottari,1/19/2020,
-1126.20,Winn Dixie,Saahil Claypool,1/18/2020,
-5.30,hangers,Sarah Bottari,1/16/2020,
-809.00,Jan i10 rent,Sarah Bottari,1/13/2020,
-34.00,If it is,Saahil Claypool,1/13/2020,
-192.00,Target,Saahil Claypool,1/13/2020,
-12.49,groceries,Sarah Bottari,1/10/2020,
-24.50,Satchel's Pizza,Sarah Bottari,1/9/2020,Calzone
-14.16,groceries,Sarah Bottari,1/7/2020,
-46.38,Target,Sarah Bottari,1/6/2020,
-76.64,rental car,Sarah Bottari,1/5/2020,
-990.95,Jan A15 rent,Sarah Bottari,1/1/2020,
+Cost,What,Who,Date,Individual,Description
+107.04,groceries,Sarah Bottari,1/30/2020,,
+56.55,groceries,Sarah Bottari,1/25/2020,,
+29.99,internet,Sarah Bottari,1/24/2020,,
+111.44,target,Sarah Bottari,1/22/2020,,
+243.3,target,Saahil Claypool,1/20/2020,,Bought house goods etc.
+28.49,Boca Fiesta,Saahil Claypool,1/20/2020,,Chimichanga and
+9.28,groceries,Sarah Bottari,1/19/2020,,
+26.2,Winn Dixie,Saahil Claypool,1/18/2020,,
+5.3,hangers,Sarah Bottari,1/16/2020,,
+809,Jan i10 rent,Sarah Bottari,1/13/2020,,
+34,If it is,Saahil Claypool,1/13/2020,,
+192,Target,Saahil Claypool,1/13/2020,,
+12.49,groceries,Sarah Bottari,1/10/2020,,
+24.5,Satchel's Pizza,Sarah Bottari,1/9/2020,,Calzone
+14.16,groceries,Sarah Bottari,1/7/2020,,
+46.38,Target,Sarah Bottari,1/6/2020,,
+76.64,rental car,Sarah Bottari,1/5/2020,,
+990.95,Jan A15 rent,Sarah Bottari,1/1/2020,,

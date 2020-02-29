@@ -6,18 +6,18 @@ import { formatMoney } from './Util';
 // TODO make more generic
 function owed(data) {
     let costs = data.reduce((people, d) => {
-        if (!d.Who in people) {
+        if (!(d.Who in people)) {
             people[d.Who] = 0.0;
         }
-        people[d.Who] = d.Cost;
+        people[d.Who] += d.Cost;
         return people;
     }, {});
     return costs;
 }
 
 const shouldSpend = {
-    saahil: .6,
-    sarah: .4
+    "Saahil Claypool": .6,
+    "Sarah Bottari": .4
 }
 
 function Message(name, spent, shouldSpent, owes) {
