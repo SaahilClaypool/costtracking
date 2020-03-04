@@ -7,7 +7,8 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-const URL = (process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "")
+// const URL = (process.env.NODE_ENV === "development" ? "http://127.0.0.1:5000" : "https://costsavings.herokuapp.com")
+const URL = (process.env.NODE_ENV === "development" ? "https://jierr542m7.execute-api.us-east-2.amazonaws.com/dev/" : "https://jierr542m7.execute-api.us-east-2.amazonaws.com/dev/")
 
 function App() {
 
@@ -31,7 +32,8 @@ function App() {
   const fetchData = async () => {
     console.log(URL);
 
-    let path = (random ? "/rand" : "/data");
+    // let path = (random ? "/rand" : "/data");
+    let path = "";
 
     const resp = await fetch(URL + path,
       {
@@ -44,7 +46,8 @@ function App() {
     );
     let body = await resp.json()
 
-    let data = JSON.parse(body).map(d => {
+
+    let data = body.map(d => {
       let vals = d.Date.split('/');
       return {
         ...d,

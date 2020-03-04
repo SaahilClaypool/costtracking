@@ -50,11 +50,7 @@ def owe(df):
 
 
 def as_json(graphs):
-    """
-    return:
-        json(graphs)
-    """
-    return json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+    return json.dumps(graphs)
     
 
 def parse_date_string(datestring):

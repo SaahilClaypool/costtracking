@@ -3,6 +3,8 @@
 temp_client_secret.json
 client_secret.json
 credentials.json
+Lambda/function.zip
+Lambda/package
 
 # Created by https://www.gitignore.io/api/python,flask
 # Edit at https://www.gitignore.io/?templates=python,flask
