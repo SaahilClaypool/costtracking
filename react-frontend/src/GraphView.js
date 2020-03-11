@@ -7,6 +7,7 @@ const WIDTH = 400;
 const HEIGHT = 400;
 
 let isCummulative = true;
+let usePersonalData = true;
 
 // https://medium.com/@jeffbutsch/using-d3-in-react-with-hooks-4a6c61f1d102
 
@@ -38,9 +39,20 @@ function updateGraph(data, d3Node) {
         .range([4.0, 10])
     let r = (d) => rScale(d.Cost);
 
-    let colorScale = d3.scaleOrdinal(d3.schemeDark2  );
+    let colorScale = d3.scaleOrdinal(d3.schemeDark2);
     let opacity = (d) => (d && d.Personal) ? '77' : 'cc';
-    let color = (d) => colorScale(d.Who) + opacity(d);
+    let color = (d) => {
+        if (d.Who === 'Sarah Bottari') {
+            return '#0a304d' + opacity(d);
+        } else if (d.Who === 'Saahil Claypool') {
+            return '#c94818' + opacity(d);
+        } else {
+            return colorScale(d.Who) + opacity(d)
+        }
+    };
+    // temp
+    color('Saahil Claypool')
+    color('Sarah Bottari')
 
     const svg = d3.select(d3Node.current);
     const content = svg.select('g');
@@ -158,19 +170,21 @@ function initGraph(data, d3Node) {
 }
 
 function cleanData(data) {
-    if (isCummulative && data) {
-        data.sort((a, b) => a.day > b.day)
+    let filteredData = data.filter(d => !d.Personal || usePersonalData)
+    if (isCummulative && filteredData) {
+        filteredData.sort((a, b) => a.day > b.day)
         let totalCost = {}
-        data.forEach((d, i) => {
+        filteredData
+            .forEach((d, i) => {
             if (!(d.Who in totalCost)) {
                 totalCost[d.Who] = 0
             }
             totalCost[d.Who] += d.Cost
             d.totalCost = totalCost[d.Who]
-            data[i] = d
+            filteredData[i] = d
         })
     }
-    return data;
+    return filteredData;
 }
 
 function GraphView(props) {
@@ -178,6 +192,7 @@ function GraphView(props) {
     let d3Node = useRef(null);
 
     isCummulative = props.isCummulative;
+    usePersonalData = props.isPersonal;
 
     useEffect(() => {
         initGraph(cleanData(props.data, props.month), d3Node)
@@ -203,7 +218,8 @@ function GraphView(props) {
 GraphView.propTypes = {
     month: PropTypes.number,
     data: PropTypes.array,
-    isCummulative: PropTypes.bool
+    isCummulative: PropTypes.bool,
+    isPersonal: PropTypes.bool
 };
 
 

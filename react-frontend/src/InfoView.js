@@ -36,7 +36,9 @@ function Message(name, spent, shouldSpent, owes) {
 }
 
 function InfoView(props) {
-    let costs = owed(props.data);
+    
+    let data = props.data.filter(d => !d.Personal); 
+    let costs = owed(data);
     let msgs = [];
     let totalSpent = 0;
 
