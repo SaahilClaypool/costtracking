@@ -24,6 +24,7 @@ async function loadRemoteData(URL) {
       }
     }
   );
+  console.log(resp)
   let body = await resp.json()
 
   return body;
@@ -86,7 +87,7 @@ function App() {
 
   const fetchData = async () => {
 
-    let body = mockData();
+    let body = (random ? mockData() : await loadRemoteData(URL));
     let data = body.map(d => {
         let vals = d.Date.split('/');
         return {
