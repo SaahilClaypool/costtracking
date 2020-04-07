@@ -1,6 +1,8 @@
 # Cost Sharing
 
-https://costsavings.herokuapp.com/
+http://d18fyddwidf81f.cloudfront.net/
+
+(TODO: make a real url)
 
 App to show spending and help calculate what is owed between two people at the end of the month
 
@@ -32,7 +34,7 @@ Trello: https://trello.com/b/Nz1DZk2j/costsavings
 
 1. Create a bucket for static hosting
 
-    run build && aws s3 sync build s3://costsaving-react
+    npm run build && aws s3 sync build s3://costsaving-react
 
 2. Create a cloudfront cdn for the static files
 
