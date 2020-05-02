@@ -23,7 +23,7 @@ const shouldSpend = {
 function Message(name, spent, shouldSpent, owes) {
     return (
         <div className="Message" key={name}>
-            <strong>{name}</strong> has spent {formatMoney(spent)}.
+            <strong>{name}</strong> has spent {formatMoney(parseFloat(spent))}.
         <br />
             {(() => {
                 if (owes > 0) {

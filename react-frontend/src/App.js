@@ -88,10 +88,12 @@ function App() {
   const fetchData = async () => {
 
     let body = (random ? mockData() : await loadRemoteData(URL));
+    console.log(body)
     let data = body.map(d => {
         let vals = d.Date.split('/');
         return {
           ...d,
+          Cost: parseFloat(d.Cost.toString().replace(',', '')),
           month: parseInt(vals[0]),
           day: parseInt(vals[1]),
           year: parseInt(vals[2]),
@@ -103,6 +105,7 @@ function App() {
       return (dateVal(a) - dateVal(b))
     });
 
+    console.log(data)
     setData(data);
   };
 
