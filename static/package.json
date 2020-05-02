@@ -13,7 +13,7 @@
   "devDependencies": {
     "d3": "^5.15.0",
     "ify-loader": "^1.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
